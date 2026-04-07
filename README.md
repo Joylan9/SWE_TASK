@@ -1,202 +1,502 @@
-# 🗓 Wall Calendar — Interactive React Component
+<![CDATA[<div align="center">
 
-A production-grade, interactive Wall Calendar built as a React component. Inspired by physical wall calendars with spiral binding, hero imagery, and clean grid layouts — fully reimagined as an interactive digital experience.
+# 🗓 Wall Calendar
 
-![React](https://img.shields.io/badge/React-19.2-61DAFB?logo=react&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-6.0-3178C6?logo=typescript&logoColor=white)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.2-38B2AC?logo=tailwindcss&logoColor=white)
-![Framer Motion](https://img.shields.io/badge/Framer_Motion-12-0055FF?logo=framer&logoColor=white)
-![Vitest](https://img.shields.io/badge/Vitest-4.1-6E9F18?logo=vitest&logoColor=white)
+### A Production-Grade Interactive Calendar Experience
+
+*Inspired by physical wall calendars — spiral binding, full-bleed hero imagery, and clean grid layouts — fully reimagined as an interactive digital experience.*
+
+<br />
+
+[![Live Demo](https://img.shields.io/badge/▶_Live_Demo-Visit_App-0A66C2?style=for-the-badge&logo=vercel&logoColor=white)](https://swe-task-ecdgwl5yq-joylan9s-projects.vercel.app)
+
+<br />
+
+![React](https://img.shields.io/badge/React-19.2-61DAFB?style=flat-square&logo=react&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-6.0-3178C6?style=flat-square&logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.2-38B2AC?style=flat-square&logo=tailwindcss&logoColor=white)
+![Framer Motion](https://img.shields.io/badge/Framer_Motion-12-0055FF?style=flat-square&logo=framer&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-8.0-646CFF?style=flat-square&logo=vite&logoColor=white)
+![Vitest](https://img.shields.io/badge/Vitest-4.1-6E9F18?style=flat-square&logo=vitest&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
+
+<br />
+
+<img src="assets/preview.png" alt="Wall Calendar Preview" width="720" />
+
+<br />
+
+</div>
+
+---
+
+## 📑 Table of Contents
+
+- [✨ Features](#-features)
+- [🛠 Tech Stack](#-tech-stack)
+- [🏗 Architecture](#-architecture)
+- [📁 Project Structure](#-project-structure)
+- [🚀 Getting Started](#-getting-started)
+- [🧪 Testing](#-testing)
+- [🎨 Design Decisions](#-design-decisions)
+- [♿ Accessibility](#-accessibility)
+- [📱 Responsive Design](#-responsive-design)
+- [🔮 Roadmap](#-roadmap)
+- [📄 License](#-license)
 
 ---
 
 ## ✨ Features
 
-### Core Calendar
-- **Wall Calendar Aesthetic** — Decorative spiral binding, full-bleed hero images with diagonal chevron clip-path, Month+Year badge on a blue geometric polygon
+<table>
+<tr>
+<td width="50%">
+
+### 📅 Core Calendar
+- **Wall Calendar Aesthetic** — Decorative spiral binding, full-bleed hero images with diagonal chevron `clip-path`, Month+Year badge on a blue geometric polygon
 - **Date Grid** — ISO week standard (Monday start), SAT/SUN weekend accents, overflow date rendering, today highlighting
 - **Month Navigation** — Animated page-flip transitions via Framer Motion with hero image changes per month
-- **Keyboard Navigation** — Full arrow-key navigation across the date grid
+- **Keyboard Navigation** — Full arrow-key traversal across the date grid
 
-### Date Range Selection
-- **Three-click state machine** — Click 1 sets start, Click 2 sets end (auto-swaps if before start), Click 3 resets
-- **Visual states** — idle, range-start (left pill), range-end (right pill), range-middle (fill), single-day (circle)
+</td>
+<td width="50%">
+
+### 🎯 Date Range Selection
+- **Three-click state machine** — Click 1 → start, Click 2 → end (auto-swaps if before start), Click 3 → reset
+- **Visual states** — `idle` · `range-start` (left pill) · `range-end` (right pill) · `range-middle` (fill) · `single-day` (circle)
 - **Hover preview** — Ghost/preview range shown while hovering after start selection
-- **Touch support** — Same selection logic works on touch devices
+- **Touch support** — Same selection logic works seamlessly on touch devices
 
-### Notes System
-- **Range-tagged notes** — Notes attached to selected date ranges (or general monthly notes)
+</td>
+</tr>
+<tr>
+<td width="50%">
+
+### 📝 Notes System
+- **Range-tagged notes** — Notes attached to selected date ranges or general monthly notes
 - **Ruled lines** — CSS `repeating-linear-gradient` simulates notebook paper
 - **CRUD operations** — Add, view, and delete notes
-- **localStorage persistence** — All notes saved under `wall-calendar-notes` key
+- **localStorage persistence** — All notes auto-saved under `wall-calendar-notes` key
 
-### Theme System
-- **Light & Dark modes** — Full theme switching with CSS custom properties
+</td>
+<td width="50%">
+
+### 🎨 Theming & Extras
+- **Light & Dark modes** — Full theme switching with CSS custom properties + smooth transitions
 - **Persistent preference** — Theme saved to localStorage
-- **Smooth transitions** — All theme changes animate smoothly
+- **🇮🇳 Holiday Markers** — Indian public holidays (Republic Day, Independence Day, Diwali, etc.)
+- **🖨 Print Stylesheet** — Clean, ink-friendly `@media print` CSS
 
-### Bonus Features
-- **🇮🇳 Holiday Markers** — Indian public holidays marked with colored dots (Republic Day, Independence Day, Diwali, etc.)
-- **🎨 Month Color Theming** — Pre-mapped accent colors per month matching seasonal hero imagery
-- **🖨 Print Stylesheet** — Clean, ink-friendly `@media print` CSS (no shadows, hidden UI controls)
+</td>
+</tr>
+</table>
 
 ---
 
 ## 🛠 Tech Stack
 
-| Technology | Version | Purpose |
-|-----------|---------|---------|
-| React | 19.2 | UI framework (functional components + hooks) |
-| TypeScript | 6.0 (strict mode) | Type safety |
-| Tailwind CSS | 4.2 | Utility classes for layout/spacing |
-| date-fns | 4.1 | Date manipulation (no native Date math) |
-| Framer Motion | 12.x | Page-flip animations and transitions |
-| lucide-react | 1.7 | Icon system (ChevronLeft/Right, Sun/Moon, Trash2, etc.) |
-| Vite | 8.0 | Build tool and dev server |
-| Vitest | 4.1 | Test runner |
-| React Testing Library | 16.x | Component testing |
+<table>
+<thead>
+<tr>
+<th align="center">Layer</th>
+<th>Technology</th>
+<th>Version</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">⚛️</td>
+<td><strong>React</strong></td>
+<td><code>19.2</code></td>
+<td>UI framework — functional components + hooks</td>
+</tr>
+<tr>
+<td align="center">🔷</td>
+<td><strong>TypeScript</strong></td>
+<td><code>6.0</code></td>
+<td>Static type safety (strict mode enabled)</td>
+</tr>
+<tr>
+<td align="center">🎨</td>
+<td><strong>Tailwind CSS</strong></td>
+<td><code>4.2</code></td>
+<td>Utility-first styling for layout & spacing</td>
+</tr>
+<tr>
+<td align="center">📅</td>
+<td><strong>date-fns</strong></td>
+<td><code>4.1</code></td>
+<td>Pure, tree-shakeable date manipulation</td>
+</tr>
+<tr>
+<td align="center">🎬</td>
+<td><strong>Framer Motion</strong></td>
+<td><code>12.x</code></td>
+<td>Page-flip animations & smooth transitions</td>
+</tr>
+<tr>
+<td align="center">🎯</td>
+<td><strong>lucide-react</strong></td>
+<td><code>1.7</code></td>
+<td>Icon system (ChevronLeft/Right, Sun/Moon, Trash2)</td>
+</tr>
+<tr>
+<td align="center">⚡</td>
+<td><strong>Vite</strong></td>
+<td><code>8.0</code></td>
+<td>Build tool & lightning-fast dev server</td>
+</tr>
+<tr>
+<td align="center">🧪</td>
+<td><strong>Vitest</strong></td>
+<td><code>4.1</code></td>
+<td>Unit & component testing</td>
+</tr>
+<tr>
+<td align="center">🧩</td>
+<td><strong>React Testing Library</strong></td>
+<td><code>16.x</code></td>
+<td>User-centric component testing</td>
+</tr>
+</tbody>
+</table>
+
+---
+
+## 🏗 Architecture
+
+```mermaid
+graph TB
+    subgraph Entry ["🚪 Entry Point"]
+        A[main.tsx] --> B[App.tsx]
+    end
+
+    subgraph Calendar ["📅 WallCalendar Component"]
+        B --> C[WallCalendar.tsx<br/><i>Root Orchestrator</i>]
+
+        C --> D[CalendarHeader.tsx<br/><i>Spiral Binding + Hero + Badge</i>]
+        C --> E[MonthNavigator.tsx<br/><i>Prev/Next Controls</i>]
+        C --> F[CalendarGrid.tsx<br/><i>7-Column Date Grid</i>]
+        C --> G[NotesPanel.tsx<br/><i>Notes Textarea + List</i>]
+        C --> H[ThemeToggle.tsx<br/><i>Light/Dark Switcher</i>]
+
+        F --> I[CalendarDay.tsx<br/><i>Atomic Cell · React.memo</i>]
+    end
+
+    subgraph Hooks ["🪝 Custom Hooks"]
+        C -.-> J[useCalendar<br/><i>useReducer state machine</i>]
+        C -.-> K[useDateRange<br/><i>Hover preview logic</i>]
+        C -.-> L[useNotes<br/><i>CRUD + localStorage</i>]
+    end
+
+    subgraph Utils ["🔧 Utilities"]
+        F -.-> M[calendarUtils.ts<br/><i>Pure date helpers</i>]
+        D -.-> N[imageUtils.ts<br/><i>Month → image map</i>]
+    end
+
+    subgraph Data ["📦 Constants & Types"]
+        O[calendar.constants.ts<br/><i>Images, Holidays, Colors</i>]
+        P[calendar.types.ts<br/><i>TypeScript Interfaces</i>]
+    end
+
+    style Entry fill:#1a1a2e,stroke:#16213e,color:#e0e0e0
+    style Calendar fill:#0f3460,stroke:#16213e,color:#e0e0e0
+    style Hooks fill:#533483,stroke:#16213e,color:#e0e0e0
+    style Utils fill:#e94560,stroke:#16213e,color:#e0e0e0
+    style Data fill:#0a3d62,stroke:#16213e,color:#e0e0e0
+```
+
+### State Management Flow
+
+```mermaid
+stateDiagram-v2
+    [*] --> Idle : Component Mount
+
+    state "Date Selection" as DS {
+        Idle --> StartSelected : Click date
+        StartSelected --> RangeComplete : Click another date
+        StartSelected --> SingleDay : Click same date
+        RangeComplete --> Idle : Click any date (reset)
+        SingleDay --> Idle : Click any date (reset)
+    }
+
+    state "Hover Preview" as HP {
+        state "Ghost range visible" as GR
+        StartSelected --> GR : Mouse enters cell
+        GR --> StartSelected : Mouse leaves cell
+    }
+```
 
 ---
 
 ## 📁 Project Structure
 
 ```
-src/
-├── components/
-│   └── WallCalendar/
-│       ├── index.tsx                  # Public barrel export
-│       ├── WallCalendar.tsx           # Root orchestrator component
-│       ├── WallCalendar.test.tsx      # 10 test cases (Vitest + RTL)
-│       ├── CalendarHeader.tsx         # Spiral binding + hero image + month badge
-│       ├── CalendarGrid.tsx           # 7-column date grid with keyboard nav
-│       ├── CalendarDay.tsx            # Atomic day cell (React.memo optimized)
-│       ├── NotesPanel.tsx             # Notes textarea + saved notes list
-│       ├── MonthNavigator.tsx         # Prev/Next month arrow controls
-│       ├── ThemeToggle.tsx            # Light/Dark theme switcher
-│       ├── hooks/
-│       │   ├── useCalendar.ts         # Calendar state machine (useReducer)
-│       │   ├── useDateRange.ts        # Hover preview range logic
-│       │   └── useNotes.ts            # Notes CRUD + localStorage
-│       ├── utils/
-│       │   ├── calendarUtils.ts       # Pure date helper functions (date-fns)
-│       │   └── imageUtils.ts          # Month-to-image mapping + preloading
-│       ├── types/
-│       │   └── calendar.types.ts      # All TypeScript interfaces/types
-│       └── constants/
-│           └── calendar.constants.ts  # Month images, holidays, colors
-├── App.tsx                            # Application entry
-├── main.tsx                           # React DOM mount
-└── index.css                          # Design tokens + global styles
+📦 SWE_Intern_task/
+├── 📄 index.html                          # HTML entry + meta + fonts
+├── 📄 vite.config.ts                      # Vite + React plugin config
+├── 📄 tsconfig.json                       # TypeScript project refs
+├── 📄 package.json                        # Scripts & dependencies
+│
+├── 📂 public/
+│   ├── favicon.svg                        # App favicon
+│   └── icons.svg                          # SVG sprite sheet
+│
+└── 📂 src/
+    ├── 📄 main.tsx                        # React DOM mount
+    ├── 📄 App.tsx                         # Application shell
+    ├── 📄 index.css                       # Design tokens + global styles
+    │
+    ├── 📂 components/
+    │   └── 📂 WallCalendar/
+    │       ├── 📄 index.tsx               # Public barrel export
+    │       ├── 📄 WallCalendar.tsx        # Root orchestrator component
+    │       ├── 📄 WallCalendar.test.tsx   # 10 test cases (Vitest + RTL)
+    │       │
+    │       ├── 📄 CalendarHeader.tsx      # Spiral binding + hero + badge
+    │       ├── 📄 CalendarGrid.tsx        # 7-column grid + keyboard nav
+    │       ├── 📄 CalendarDay.tsx         # Atomic day cell (React.memo)
+    │       ├── 📄 MonthNavigator.tsx      # Prev/Next month arrows
+    │       ├── 📄 NotesPanel.tsx          # Notes textarea + saved list
+    │       ├── 📄 ThemeToggle.tsx         # Light/Dark theme switcher
+    │       │
+    │       ├── 📂 hooks/
+    │       │   ├── useCalendar.ts         # Calendar state (useReducer)
+    │       │   ├── useDateRange.ts        # Hover preview range logic
+    │       │   └── useNotes.ts            # Notes CRUD + localStorage
+    │       │
+    │       ├── 📂 utils/
+    │       │   ├── calendarUtils.ts       # Pure date helpers (date-fns)
+    │       │   └── imageUtils.ts          # Month → image mapping
+    │       │
+    │       ├── 📂 types/
+    │       │   └── calendar.types.ts      # All TypeScript interfaces
+    │       │
+    │       └── 📂 constants/
+    │           └── calendar.constants.ts  # Month images, holidays, colors
+    │
+    └── 📂 test/
+        └── ...                            # Test setup & configuration
 ```
 
 ---
 
 ## 🚀 Getting Started
 
+### Prerequisites
+
+- **Node.js** `≥ 18.0` — [Download](https://nodejs.org/)
+- **npm** `≥ 9.0` (bundled with Node.js)
+
+### Installation
+
 ```bash
+# 1 · Clone the repository
 git clone https://github.com/Joylan9/SWE_TASK.git
+
+# 2 · Navigate into the project
 cd SWE_TASK
+
+# 3 · Install dependencies
 npm install
+
+# 4 · Start the development server
 npm run dev
 ```
 
-Open [http://localhost:5173](http://localhost:5173) in your browser.
+The app will be available at **[http://localhost:5173](http://localhost:5173)**
+
+### Available Scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start Vite dev server with HMR |
+| `npm run build` | Type-check + production build |
+| `npm run preview` | Preview the production build locally |
+| `npm run lint` | Run ESLint across the project |
+| `npm run test` | Run all tests once |
+| `npm run test:watch` | Run tests in watch mode |
+| `npm run test:coverage` | Run tests with coverage report |
 
 ---
 
-## 🧪 Running Tests
+## 🧪 Testing
+
+The project includes **10 comprehensive test cases** built with Vitest + React Testing Library:
 
 ```bash
 # Run all tests
 npm run test
 
-# Run in watch mode
+# Watch mode (re-runs on file changes)
 npm run test:watch
 
-# Run with coverage
+# Generate coverage report
 npm run test:coverage
 ```
 
-### Test Coverage (10 test cases)
+<details>
+<summary><strong>📋 Full Test Suite Breakdown</strong></summary>
 
-| # | Test | Description |
-|---|------|-------------|
-| 1 | Renders current month/year | Component initializes with system date |
-| 2 | Date selection as range start | Clicking a date sets `aria-selected=true` |
-| 3 | Two-date range creation | Verifies start/middle/end states |
-| 4 | Single-day selection | Same date clicked twice → `single` state |
-| 5 | Third click resets range | State machine resets and starts new selection |
-| 6 | Note creation + persistence | Adds note to list and calls localStorage |
-| 7 | Note deletion | Removes note from DOM and storage |
-| 8 | Month navigation | Next month button updates the label |
-| 9 | Range auto-swap | End < Start → automatically swapped |
-| 10 | Aria labels validation | Every day cell has a valid `aria-label` |
+<br />
+
+| # | Test Case | What It Validates |
+|:-:|-----------|-------------------|
+| 1 | **Renders current month/year** | Component initializes with system date |
+| 2 | **Date selection as range start** | Clicking a date sets `aria-selected="true"` |
+| 3 | **Two-date range creation** | Verifies start → middle → end visual states |
+| 4 | **Single-day selection** | Same date clicked twice → `single` state |
+| 5 | **Third click resets range** | State machine resets and starts new selection |
+| 6 | **Note creation + persistence** | Adds note to DOM list and calls localStorage |
+| 7 | **Note deletion** | Removes note from DOM and storage |
+| 8 | **Month navigation** | Next month button correctly updates the label |
+| 9 | **Range auto-swap** | End < Start → automatically swapped |
+| 10 | **ARIA labels validation** | Every day cell has a valid `aria-label` |
+
+</details>
 
 ---
 
 ## 🎨 Design Decisions
 
-### Why `useReducer` over `useState`?
-The calendar has complex interdependent state (month, year, selected range, notes, theme). A reducer pattern gives us:
-- A **pure function** that's easy to test
-- A **single source of truth** for all calendar state
-- A clear **action-based API** that documents all possible state transitions
-- Prevents impossible state combinations (e.g., range end without start)
+<details open>
+<summary><strong>Why <code>useReducer</code> over <code>useState</code>?</strong></summary>
 
-### Why `date-fns`?
-- Tree-shakeable (import only what you use, unlike Moment.js)
-- Pure functions (no mutating Date objects)
-- Full TypeScript support
-- ISO week standard support (week starts Monday)
+<br />
 
-### Why CSS Custom Properties for theming?
-- Zero JS overhead for theme switching — just change a `data-theme` attribute
-- All color values defined once, referenced everywhere
-- Easy to add new themes (e.g., sepia, high-contrast)
-- No flash of wrong theme on page load (works with SSR)
+The calendar manages complex, interdependent state: month, year, selected range, notes, and theme. A reducer pattern provides:
 
-### Why `React.memo` with custom comparator?
-The calendar grid has 42 cells. Without memoization, changing any parent state re-renders all 42 cells. The custom `areEqual` comparator ensures cells only re-render when their visual state actually changes (rangeState, isToday, notes count).
+- ✅ **Pure function** — easy to test in isolation
+- ✅ **Single source of truth** — all calendar state in one place
+- ✅ **Action-based API** — self-documenting state transitions
+- ✅ **Impossible state prevention** — e.g., range end without start cannot occur
 
-### Clip-path approach
-The diagonal chevron cut on the hero image uses `clip-path: polygon()` for a crisp, performant, resolution-independent visual effect without image masking or SVG overlays.
+</details>
+
+<details>
+<summary><strong>Why <code>date-fns</code> over alternatives?</strong></summary>
+
+<br />
+
+- 🌳 **Tree-shakeable** — import only what you use (unlike Moment.js)
+- 🔒 **Immutable** — pure functions, never mutates Date objects
+- 🔷 **Full TypeScript support** — first-class type definitions
+- 📅 **ISO week standard** — supports `weekStartsOn: 1` (Monday start)
+
+</details>
+
+<details>
+<summary><strong>Why CSS Custom Properties for theming?</strong></summary>
+
+<br />
+
+- ⚡ **Zero JS overhead** — theme switch = changing a single `data-theme` attribute
+- 🎨 **DRY** — all color values defined once, referenced everywhere
+- 🧩 **Extensible** — trivial to add sepia, high-contrast, or custom themes
+- 🖥 **SSR-safe** — no flash of wrong theme on initial page load
+
+</details>
+
+<details>
+<summary><strong>Why <code>React.memo</code> with custom comparator?</strong></summary>
+
+<br />
+
+The calendar grid has **42 cells**. Without memoization, any parent state change re-renders all cells. The custom `areEqual` comparator ensures cells **only re-render when their visual state actually changes** (rangeState, isToday, notes count) — keeping the grid buttery smooth.
+
+</details>
+
+<details>
+<summary><strong>Why <code>clip-path: polygon()</code> for the hero?</strong></summary>
+
+<br />
+
+The diagonal chevron cut on the hero image uses `clip-path: polygon()` for a **crisp, performant, resolution-independent** visual effect — no image masking, no SVG overlays, pure CSS geometry.
+
+</details>
 
 ---
 
-## ♿ Accessibility (WCAG 2.1 AA)
+## ♿ Accessibility
 
-- **Keyboard navigation** — Arrow keys traverse the date grid; Enter/Space selects dates
-- **Focus visible** — All focusable elements have visible focus rings
-- **Semantic roles** — `role="grid"` on calendar, `role="gridcell"` on each day, `role="columnheader"` on week headers
-- **ARIA attributes** — `aria-selected` on selected dates, `aria-label` on icon-only buttons, `aria-live="polite"` for range announcements
-- **Color contrast** — All text meets ≥ 4.5:1 ratio against backgrounds
-- **Touch targets** — Minimum 44×44px on mobile (WCAG 2.5.5)
+This component targets **WCAG 2.1 Level AA** compliance:
+
+| Aspect | Implementation |
+|--------|---------------|
+| ⌨️ **Keyboard Navigation** | Arrow keys traverse the date grid; Enter/Space selects dates |
+| 🔵 **Focus Visible** | All focusable elements have visible focus rings |
+| 🏷 **Semantic Roles** | `role="grid"` on calendar, `role="gridcell"` on each day, `role="columnheader"` on week headers |
+| 📢 **ARIA Attributes** | `aria-selected` on selected dates, `aria-label` on icon-only buttons, `aria-live="polite"` for range announcements |
+| 🎨 **Color Contrast** | All text meets **≥ 4.5:1** ratio against backgrounds |
+| 👆 **Touch Targets** | Minimum **44×44px** on mobile (WCAG 2.5.5) |
 
 ---
 
-## 📱 Responsive Behavior
+## 📱 Responsive Design
 
 | Breakpoint | Layout |
 |-----------|--------|
-| ≥768px (Desktop) | Full card: hero on top, grid + notes side by side, max-width 480px centered |
-| <768px (Mobile) | Notes stacks below grid, hero height reduced, 44×44px touch targets, swipe navigation |
+| **≥ 768px** (Desktop) | Full card: hero on top, grid + notes side by side, max-width 480px centered |
+| **< 768px** (Mobile) | Notes stack below grid, hero height reduced, 44×44px touch targets, swipe navigation |
 
 ---
 
-## 🔮 Future Improvements
+## 🔮 Roadmap
 
-- **Event chips** — Single-day event labels rendered as colored chips on date cells
-- **Drag-to-select range** — Click and drag across dates for faster range selection
-- **Multi-month view** — Side-by-side current + next month on wide screens
-- **Recurring notes** — Weekly/monthly repeating note support
-- **Export to PNG** — Download calendar as image using `html-to-image`
-- **i18n support** — Locale-aware month names, week start day, and RTL layout
-- **Sync backend** — Optional REST/GraphQL sync for cross-device notes
-- **Animation preferences** — Respect `prefers-reduced-motion` media query
-- **Customizable holidays** — User-configurable holiday lists beyond Indian defaults
+> Planned improvements and feature ideas for future iterations.
+
+- [ ] **Event chips** — Colored event labels rendered directly on date cells
+- [ ] **Drag-to-select** — Click and drag across dates for faster range selection
+- [ ] **Multi-month view** — Side-by-side current + next month on wide screens
+- [ ] **Recurring notes** — Weekly/monthly repeating note support
+- [ ] **Export to PNG** — Download calendar as image via `html-to-image`
+- [ ] **i18n support** — Locale-aware month names, week start day, and RTL layout
+- [ ] **Cloud sync** — Optional REST/GraphQL sync for cross-device notes
+- [ ] **Reduced motion** — Respect `prefers-reduced-motion` media query
+- [ ] **Customizable holidays** — User-configurable holiday lists beyond Indian defaults
 
 ---
+
+## 🤝 Contributing
+
+Contributions are welcome! Here's how to get started:
+
+```bash
+# 1 · Fork the repository
+
+# 2 · Create a feature branch
+git checkout -b feature/amazing-feature
+
+# 3 · Make your changes and commit
+git commit -m "feat: add amazing feature"
+
+# 4 · Push to the branch
+git push origin feature/amazing-feature
+
+# 5 · Open a Pull Request
+```
+
+---
+
+<div align="center">
 
 ## 📄 License
 
-MIT
+This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
+
+---
+
+<br />
+
+**Built with ❤️ using React, TypeScript & Vite**
+
+<br />
+
+[![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://typescriptlang.org)
+[![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vite.dev)
+[![Vercel](https://img.shields.io/badge/Deployed_on-Vercel-000?style=for-the-badge&logo=vercel&logoColor=white)](https://swe-task-ecdgwl5yq-joylan9s-projects.vercel.app)
+
+</div>
+]]>
