@@ -175,6 +175,14 @@ function calendarReducer(state: CalendarState, action: CalendarAction): Calendar
       };
     }
 
+    case 'SET_YEAR': {
+      return {
+        ...state,
+        currentYear: action.payload,
+        selectedRange: { start: null, end: null },
+      };
+    }
+
     default:
       return state;
   }
@@ -244,6 +252,13 @@ export function useCalendar() {
     });
   }, [state.theme, dispatch]);
 
+  const setYear = useCallback(
+    (year: number) => {
+      dispatch({ type: 'SET_YEAR', payload: year });
+    },
+    [dispatch]
+  );
+
   return {
     state,
     dispatch,
@@ -254,6 +269,7 @@ export function useCalendar() {
     prevMonth,
     resetRange,
     toggleTheme,
+    setYear,
   };
 }
 

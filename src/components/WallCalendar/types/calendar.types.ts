@@ -83,7 +83,8 @@ export type CalendarAction =
   | { type: 'DELETE_NOTE'; payload: string }
   | { type: 'SET_THEME'; payload: 'light' | 'dark' }
   | { type: 'RESET_RANGE' }
-  | { type: 'SET_NOTES'; payload: CalendarNote[] };
+  | { type: 'SET_NOTES'; payload: CalendarNote[] }
+  | { type: 'SET_YEAR'; payload: number };
 
 /** Theme context value */
 export interface ThemeContextValue {

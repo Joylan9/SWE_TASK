@@ -44,6 +44,7 @@ export const WallCalendar: React.FC = () => {
     nextMonth,
     prevMonth,
     toggleTheme,
+    setYear,
   } = useCalendar();
 
   const { isDateInHoverRange, onDateHover, onDateHoverEnd } = useDateRange(
@@ -134,6 +135,7 @@ export const WallCalendar: React.FC = () => {
             year={state.currentYear}
             onPrevMonth={handlePrevMonth}
             onNextMonth={handleNextMonth}
+            onSetYear={setYear}
           />
 
           {/* Main Content: Notes + Grid side by side on desktop, stacked on mobile */}

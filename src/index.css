@@ -341,10 +341,41 @@ body {
   letter-spacing: 0.02em;
 }
 
-.cal-nav__year {
+.cal-nav__year-select {
+  font-family: var(--cal-font-family);
   font-size: var(--cal-font-size-sm);
-  font-weight: 400;
-  color: var(--cal-color-text-muted);
+  font-weight: 500;
+  color: var(--cal-color-text-secondary);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  padding: 2px 4px;
+  cursor: pointer;
+  outline: none;
+  transition: border var(--cal-transition-fast), background var(--cal-transition-fast), color var(--cal-transition-fast);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%236B7280' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 4px center;
+  padding-right: 18px;
+}
+
+.cal-nav__year-select:hover {
+  border-color: var(--cal-color-border);
+  background-color: var(--cal-color-bg-hover);
+  color: var(--cal-color-accent);
+}
+
+.cal-nav__year-select:focus-visible {
+  border-color: var(--cal-color-accent);
+  outline: 2px solid var(--cal-color-accent);
+  outline-offset: 1px;
+}
+
+[data-theme="dark"] .cal-nav__year-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%239CA3AF' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
 
 /* ═══════════════════════════════════════════════════════════════
