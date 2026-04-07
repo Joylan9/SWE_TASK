@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Generated project explanation artifacts
+.chrome-pdf-profile/
+Project_Explanation.html
+Project_Explanation.pdf
