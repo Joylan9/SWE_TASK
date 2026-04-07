@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wall Calendar Project Explanation</title>
+  <style>
+    :root {
+      --bg: #eef4f8;
+      --page: #ffffff;
+      --ink: #162033;
+      --muted: #526077;
+      --accent: #2aa7da;
+      --accent-soft: #e7f6fc;
+      --line: #d6e1ea;
+      --success: #12744c;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Segoe UI", Arial, sans-serif;
+      line-height: 1.55;
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 0 auto 18px;
+      padding: 18mm 16mm;
+      background: var(--page);
+      box-shadow: 0 10px 28px rgba(13, 35, 59, 0.08);
+      page-break-after: always;
+    }
+
+    .page:last-child {
+      page-break-after: auto;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0 0 10px;
+      line-height: 1.2;
+    }
+
+    h1 {
+      font-size: 28px;
+      letter-spacing: 0.02em;
+    }
+
+    h2 {
+      font-size: 19px;
+      color: var(--accent);
+      margin-top: 18px;
+    }
+
+    h3 {
+      font-size: 15px;
+      margin-top: 14px;
+    }
+
+    p {
+      margin: 0 0 10px;
+      font-size: 13.5px;
+    }
+
+    ul,
+    ol {
+      margin: 8px 0 10px 20px;
+      padding: 0;
+      font-size: 13.5px;
+    }
+
+    li {
+      margin: 0 0 6px;
+    }
+
+    .hero {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px 20px;
+      background: linear-gradient(135deg, #ffffff 0%, #f3fbff 100%);
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0 14px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px 14px;
+      background: #fff;
+    }
+
+    .card p:last-child,
+    .callout p:last-child {
+      margin-bottom: 0;
+    }
+
+    .callout {
+      border-left: 4px solid var(--accent);
+      background: #f8fcfe;
+      padding: 10px 12px;
+      border-radius: 10px;
+      margin: 12px 0;
+    }
+
+    .good {
+      border-left-color: var(--success);
+      background: #f3faf6;
+    }
+
+    .step {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px 14px;
+      margin-bottom: 12px;
+    }
+
+    .step-title {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--accent);
+    }
+
+    .say,
+    .show {
+      margin-top: 8px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      background: #fafcff;
+      border: 1px solid var(--line);
+    }
+
+    .say strong,
+    .show strong {
+      color: var(--ink);
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .small {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .footer {
+      margin-top: 18px;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    code {
+      padding: 1px 5px;
+      border-radius: 6px;
+      background: #f2f6fa;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 12px;
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+
+      .page {
+        margin: 0;
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section class="page">
+    <div class="hero">
+      <h1>Wall Calendar Project Explanation</h1>
+      <p>
+        Simple English notes for your video demonstration of the interactive calendar component.
+        This document is written so you can use it as a speaking guide while recording.
+      </p>
+
+      <div class="tag-row">
+        <span class="tag">React 19</span>
+        <span class="tag">TypeScript</span>
+        <span class="tag">Vite</span>
+        <span class="tag">Tailwind CSS 4</span>
+        <span class="tag">Framer Motion</span>
+        <span class="tag">date-fns</span>
+        <span class="tag">Vitest</span>
+      </div>
+
+      <div class="callout">
+        <p><strong>One-line project summary:</strong> This project is a polished wall calendar web component that combines a physical calendar look with interactive date-range selection, notes, theme switching, and responsive behavior.</p>
+      </div>
+    </div>
+
+    <h2>1. What This Project Is</h2>
+    <p>
+      This project was built for a frontend engineering challenge. The goal was to turn a static
+      wall calendar design into a working and responsive web component. I used React with
+      TypeScript and focused only on the frontend, because the task clearly said there was no need
+      for a backend or database.
+    </p>
+    <p>
+      My solution keeps the visual feeling of a physical wall calendar by using a large hero image,
+      a spiral binding effect at the top, a clear month badge, and a compact notes area beside the
+      calendar grid on desktop. On mobile, the layout becomes vertical so it is still easy to use on
+      touch screens.
+    </p>
+
+    <h2>2. Main Features You Should Mention</h2>
+    <div class="meta">
+      <div class="card">
+        <h3>Wall Calendar Look</h3>
+        <p>
+          Decorative spiral rings, a monthly hero image, a blue month-and-year badge, and a layout
+          that feels like a real printed calendar.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Date Range Selection</h3>
+        <p>
+          Users can click a start date and an end date. The app highlights the start, the end, and
+          the days in between. It also supports single-day selection.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Notes Section</h3>
+        <p>
+          Users can add notes either for the whole month or for a selected date range. Notes are
+          stored in localStorage, so they stay after refresh.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Responsive and Interactive</h3>
+        <p>
+          The component works on desktop and mobile, supports touch interactions, keyboard
+          navigation, theme switching, and animated month changes.
+        </p>
+      </div>
+    </div>
+
+    <h2>3. Short Intro You Can Say in the Video</h2>
+    <div class="callout good">
+      <p>
+        "This is my interactive wall calendar component built with React and TypeScript. The idea
+        was to take the look of a physical wall calendar and make it feel modern and usable in the
+        browser. The main features are date-range selection, notes linked to the current month or a
+        selected range, smooth month navigation, theme switching, and a responsive layout for both
+        desktop and mobile."
+      </p>
+    </div>
+
+    <h2>4. Quick Technical Summary</h2>
+    <ul>
+      <li>The app entry is very small. <code>App.tsx</code> only renders the main <code>WallCalendar</code> component.</li>
+      <li><code>WallCalendar.tsx</code> is the main orchestrator. It connects the header, month navigator, notes panel, date grid, and theme toggle.</li>
+      <li>State is managed with a reducer inside <code>useCalendar.ts</code>, which makes month changes, date selection, and theme updates easier to control.</li>
+      <li>Date logic is handled with <code>date-fns</code>, which keeps the code clean and reliable.</li>
+      <li>Notes and theme preferences are persisted in <code>localStorage</code>.</li>
+      <li>The project includes automated tests with Vitest and React Testing Library.</li>
+    </ul>
+
+    <div class="footer">
+      Verified locally on April 7, 2026: <code>npm run test</code> passed with 10 out of 10 tests,
+      and <code>npm run build</code> completed successfully.
+    </div>
+  </section>
+
+  <section class="page">
+    <h2>5. Suggested Video Walkthrough Script</h2>
+    <p>
+      The easiest way to record this is to follow a clear order: show the UI first, then demonstrate
+      interactions, then explain the code structure briefly.
+    </p>
+
+    <div class="step">
+      <div class="step-title">Step 1: Show the full page first</div>
+      <div class="show">
+        <strong>What to show:</strong> Open the application on desktop and keep the whole calendar visible for a few seconds.
+      </div>
+      <div class="say">
+        <strong>What to say:</strong> "The first thing I focused on was the wall calendar aesthetic. At the top there is a hero image that changes with the month, a month badge, and a spiral-style header to make it feel like a physical calendar instead of a plain date picker."
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-title">Step 2: Explain the layout</div>
+      <div class="show">
+        <strong>What to show:</strong> Point to the hero image, month badge, navigation controls, grid, and notes section.
+      </div>
+      <div class="say">
+        <strong>What to say:</strong> "The layout is split into clear sections. The image is the visual anchor, the month navigator sits below it, the date grid is the main interactive area, and the notes panel sits beside it on desktop. This keeps both the design and the functionality balanced."
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-title">Step 3: Demonstrate month navigation</div>
+      <div class="show">
+        <strong>What to show:</strong> Click previous and next month. If possible, also change the year from the dropdown.
+      </div>
+      <div class="say">
+        <strong>What to say:</strong> "Users can move between months using the arrow buttons, and they can also change the year using the dropdown. I added animated transitions to make the month change feel more polished."
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-title">Step 4: Demonstrate the range selection</div>
+      <div class="show">
+        <strong>What to show:</strong> Click one day, then another day later in the month. Then click the same date twice for a single-day selection. Then click a third date to reset the range.
+      </div>
+      <div class="say">
+        <strong>What to say:</strong> "The calendar supports a simple three-click range flow. The first click sets the start date. The second click sets the end date and highlights all the days in between. If I click the same date twice, it becomes a single-day selection. If I click a third date after a range is complete, the selection resets and starts a new range."
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-title">Step 5: Show the hover preview</div>
+      <div class="show">
+        <strong>What to show:</strong> Click one date, then move the mouse across other dates before choosing the end.
+      </div>
+      <div class="say">
+        <strong>What to say:</strong> "After the start date is selected, hovering over the next dates shows a preview of the future range. This helps the user understand what will be selected before the second click."
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-title">Step 6: Show the notes feature</div>
+      <div class="show">
+        <strong>What to show:</strong> Add one normal monthly note. Then select a date range and add another note. Delete one note after that.
+      </div>
+      <div class="say">
+        <strong>What to say:</strong> "The notes section is functional, not just decorative. If no range is selected, the note is saved for the month. If a range is selected, the note is attached to that specific range. The note list shows the related date range, and users can also delete notes. Everything is saved in localStorage, so a refresh does not remove the notes."
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-title">Step 7: Show indicators inside the grid</div>
+      <div class="show">
+        <strong>What to show:</strong> Point to a date that has a note indicator or a holiday marker.
+      </div>
+      <div class="say">
+        <strong>What to say:</strong> "Inside the grid, I added small indicators so the calendar gives extra information without becoming visually heavy. There are note indicators for saved notes and holiday dots for predefined holidays."
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-title">Step 8: Show theme switching</div>
+      <div class="show">
+        <strong>What to show:</strong> Toggle between light mode and dark mode.
+      </div>
+      <div class="say">
+        <strong>What to say:</strong> "I added light and dark mode as an extra feature. The theme is controlled with CSS variables, and the preference is saved in localStorage so the user keeps the same mode when coming back."
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-title">Step 9: Show mobile responsiveness</div>
+      <div class="show">
+        <strong>What to show:</strong> Open responsive mode in dev tools and switch to a phone size. Scroll through the stacked layout and interact with the dates and notes.
+      </div>
+      <div class="say">
+        <strong>What to say:</strong> "On smaller screens, the layout changes from side-by-side to stacked. The notes section moves below the calendar grid, touch targets become larger, and the component remains easy to use on mobile. I also added touch-based month navigation support."
+      </div>
+    </div>
+  </section>
+
+  <section class="page">
+    <h2>6. What to Say About the Code Structure</h2>
+
+    <div class="two-col">
+      <div class="card">
+        <h3>Main Components</h3>
+        <ul>
+          <li><code>WallCalendar.tsx</code>: main container and feature wiring.</li>
+          <li><code>CalendarHeader.tsx</code>: spiral header, hero image, month badge, and page-flip animation.</li>
+          <li><code>MonthNavigator.tsx</code>: previous and next controls plus year dropdown.</li>
+          <li><code>CalendarGrid.tsx</code>: renders the weekly headers and the 42 calendar cells.</li>
+          <li><code>CalendarDay.tsx</code>: individual day cell with selection state, note indicator, and holiday dot.</li>
+          <li><code>NotesPanel.tsx</code>: note creation, note list, and note deletion.</li>
+          <li><code>ThemeToggle.tsx</code>: light and dark mode button.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Custom Hooks</h3>
+        <ul>
+          <li><code>useCalendar.ts</code>: reducer-driven state for month, year, selected range, notes, and theme.</li>
+          <li><code>useDateRange.ts</code>: hover-preview logic for the date range.</li>
+          <li><code>useNotes.ts</code>: add, delete, filter, and label notes based on the current month or selected range.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>7. Simple Technical Explanation You Can Say</h2>
+    <div class="callout">
+      <p>
+        "From an architecture point of view, I tried to keep the component modular. The main
+        <code>WallCalendar</code> component coordinates everything, while smaller components handle
+        one responsibility each. I used custom hooks so the state logic is separated from the visual
+        components. That makes the code easier to read, test, and maintain."
+      </p>
+    </div>
+
+    <h3>Date Range Logic</h3>
+    <p>
+      The date selection follows a simple state machine. The first click creates the start date. The
+      second click creates the end date. If the second date is before the first one, the app swaps
+      them automatically. If the user clicks again after the range is complete, the app resets and
+      starts a new selection. This keeps the interaction easy to understand.
+    </p>
+
+    <h3>Notes Logic</h3>
+    <p>
+      The notes system stores note text, month, year, and optional range information. Because of
+      that, notes can be shown in the notes panel and also reflected back into the calendar with note
+      indicators. Since the task was frontend-only, localStorage was the best choice for lightweight
+      persistence.
+    </p>
+
+    <h3>Styling Approach</h3>
+    <p>
+      Styling is handled with global CSS and design tokens using CSS custom properties. This helped
+      keep the look consistent and made theme switching much easier. The design also uses clip-path
+      for the hero image shape, subtle shadows, responsive layout changes, and print styles as a
+      bonus.
+    </p>
+
+    <h3>Accessibility</h3>
+    <p>
+      I also paid attention to accessibility. The calendar uses semantic roles like grid and gridcell,
+      the selected states use ARIA attributes, buttons have labels, and keyboard users can move
+      across the date cells with arrow keys.
+    </p>
+
+    <h3>Performance</h3>
+    <p>
+      The calendar has many day cells, so I wrapped the day component with <code>React.memo</code>
+      and used a custom comparison function. This helps avoid unnecessary re-renders when only a
+      small part of the state changes.
+    </p>
+
+    <h2>8. What to Say About Testing</h2>
+    <div class="callout good">
+      <p>
+        "I added automated tests to cover the most important user flows. The tests check the default
+        month rendering, range selection, single-day selection, reset behavior on the third click,
+        note creation, note deletion, month navigation, automatic range swapping, and accessibility
+        labels. I also verified the project with a successful build."
+      </p>
+    </div>
+
+    <p class="small">
+      Current verified status for this workspace: <code>npm run test</code> passed with 10 tests and
+      <code>npm run build</code> completed successfully.
+    </p>
+  </section>
+
+  <section class="page">
+    <h2>9. Final Closing Script</h2>
+    <div class="callout good">
+      <p>
+        "To summarize, this project is a frontend-focused interactive wall calendar built with React
+        and TypeScript. It matches the challenge requirements with a wall calendar aesthetic, date
+        range selection, an integrated notes area, and a responsive layout. I also added extra polish
+        like theme switching, holiday markers, animations, keyboard support, touch interactions, and
+        automated testing."
+      </p>
+    </div>
+
+    <h2>10. Shorter Version If You Want a Faster Recording</h2>
+    <p>
+      If you want to keep the video short, you can say the lines below almost exactly as written.
+    </p>
+
+    <div class="card">
+      <p>
+        "This is my interactive wall calendar built with React and TypeScript. I designed it to look
+        like a physical wall calendar, with a hero image, spiral header, and a month badge at the
+        top."
+      </p>
+      <p>
+        "The main interaction is date-range selection. The first click sets the start date, the
+        second click sets the end date, and the days in between are highlighted. If I click the same
+        date twice, it becomes a single-day selection. If I click again after finishing a range, it
+        resets and starts a new one."
+      </p>
+      <p>
+        "The notes section lets users save either monthly notes or notes for a selected range. These
+        notes are stored in localStorage, so they remain available after refresh."
+      </p>
+      <p>
+        "I also added theme switching, holiday markers, keyboard support, and touch-friendly
+        interactions. On desktop the notes and calendar sit side by side, and on mobile they stack
+        vertically for better usability."
+      </p>
+      <p>
+        "From the code side, I separated the logic into reusable components and custom hooks, and I
+        added tests to cover the important user flows. The project also builds successfully for
+        production."
+      </p>
+    </div>
+
+    <h2>11. Recording Checklist</h2>
+    <ol>
+      <li>Show the full desktop view.</li>
+      <li>Navigate between months.</li>
+      <li>Select a date range.</li>
+      <li>Show single-day selection.</li>
+      <li>Add one monthly note.</li>
+      <li>Add one range-based note.</li>
+      <li>Delete a note.</li>
+      <li>Show theme toggle.</li>
+      <li>Switch to mobile responsive mode.</li>
+      <li>Show that date selection and notes still work on mobile.</li>
+    </ol>
+
+    <div class="footer">
+      File prepared for your submission walkthrough on April 7, 2026.
+    </div>
+  </section>
+</body>
+</html>
