@@ -8,7 +8,7 @@
 
 <br />
 
-[![Live Demo](https://img.shields.io/badge/▶_Live_Demo-Visit_App-0A66C2?style=for-the-badge&logo=vercel&logoColor=white)](https://swe-task-ecdgwl5yq-joylan9s-projects.vercel.app)
+[![Live Demo](https://img.shields.io/badge/▶_Live_Demo-Visit_App-0A66C2?style=for-the-badge&logo=vercel&logoColor=white)](https://swe-task.vercel.app/)
 
 <br />
 
