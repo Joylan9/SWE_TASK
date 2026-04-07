@@ -77,7 +77,7 @@ export const MONTH_IMAGES: readonly MonthImageConfig[] = [
     accentColor: '#6B8FB5',
   },
   {
-    url: 'https://images.unsplash.com/photo-1490750967868-88aa4f44baee?auto=format&w=800&q=80',
+    url: 'https://images.unsplash.com/photo-1522748906645-95d8adfd52c7?auto=format&w=800&q=80',
     alt: 'Cherry blossoms blooming in spring',
     accentColor: '#E8919A',
   },
@@ -122,7 +122,7 @@ export const MONTH_IMAGES: readonly MonthImageConfig[] = [
     accentColor: '#8E6E53',
   },
   {
-    url: 'https://images.unsplash.com/photo-1482003297000-b7f3a8c36a97?auto=format&w=800&q=80',
+    url: 'https://images.unsplash.com/photo-1418985991508-e47386d96a71?auto=format&w=800&q=80',
     alt: 'Cozy winter scene with snow-laden pines',
     accentColor: '#3498DB',
   },
