@@ -1,4 +1,4 @@
-<![CDATA[<div align="center">
+<div align="center">
 
 # 🗓 Wall Calendar
 
@@ -22,7 +22,7 @@
 
 <br />
 
-<img src="assets/preview.png" alt="Wall Calendar Preview" width="720" />
+<img src="assets/preview.png" alt="Wall Calendar Preview" width="100%" />
 
 <br />
 
@@ -62,7 +62,7 @@
 <td width="50%">
 
 ### 🎯 Date Range Selection
-- **Three-click state machine** — Click 1 → start, Click 2 → end (auto-swaps if before start), Click 3 → reset
+- **Three-click state machine** — Click 1 sets start, Click 2 sets end (auto-swaps if before start), Click 3 resets
 - **Visual states** — `idle` · `range-start` (left pill) · `range-end` (right pill) · `range-middle` (fill) · `single-day` (circle)
 - **Hover preview** — Ghost/preview range shown while hovering after start selection
 - **Touch support** — Same selection logic works seamlessly on touch devices
@@ -95,137 +95,83 @@
 
 ## 🛠 Tech Stack
 
-<table>
-<thead>
-<tr>
-<th align="center">Layer</th>
-<th>Technology</th>
-<th>Version</th>
-<th>Purpose</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center">⚛️</td>
-<td><strong>React</strong></td>
-<td><code>19.2</code></td>
-<td>UI framework — functional components + hooks</td>
-</tr>
-<tr>
-<td align="center">🔷</td>
-<td><strong>TypeScript</strong></td>
-<td><code>6.0</code></td>
-<td>Static type safety (strict mode enabled)</td>
-</tr>
-<tr>
-<td align="center">🎨</td>
-<td><strong>Tailwind CSS</strong></td>
-<td><code>4.2</code></td>
-<td>Utility-first styling for layout & spacing</td>
-</tr>
-<tr>
-<td align="center">📅</td>
-<td><strong>date-fns</strong></td>
-<td><code>4.1</code></td>
-<td>Pure, tree-shakeable date manipulation</td>
-</tr>
-<tr>
-<td align="center">🎬</td>
-<td><strong>Framer Motion</strong></td>
-<td><code>12.x</code></td>
-<td>Page-flip animations & smooth transitions</td>
-</tr>
-<tr>
-<td align="center">🎯</td>
-<td><strong>lucide-react</strong></td>
-<td><code>1.7</code></td>
-<td>Icon system (ChevronLeft/Right, Sun/Moon, Trash2)</td>
-</tr>
-<tr>
-<td align="center">⚡</td>
-<td><strong>Vite</strong></td>
-<td><code>8.0</code></td>
-<td>Build tool & lightning-fast dev server</td>
-</tr>
-<tr>
-<td align="center">🧪</td>
-<td><strong>Vitest</strong></td>
-<td><code>4.1</code></td>
-<td>Unit & component testing</td>
-</tr>
-<tr>
-<td align="center">🧩</td>
-<td><strong>React Testing Library</strong></td>
-<td><code>16.x</code></td>
-<td>User-centric component testing</td>
-</tr>
-</tbody>
-</table>
+| Layer | Technology | Version | Purpose |
+|:-----:|-----------|---------|---------|
+| ⚛️ | **React** | `19.2` | UI framework — functional components + hooks |
+| 🔷 | **TypeScript** | `6.0` | Static type safety (strict mode enabled) |
+| 🎨 | **Tailwind CSS** | `4.2` | Utility-first styling for layout & spacing |
+| 📅 | **date-fns** | `4.1` | Pure, tree-shakeable date manipulation |
+| 🎬 | **Framer Motion** | `12.x` | Page-flip animations & smooth transitions |
+| 🎯 | **lucide-react** | `1.7` | Icon system (ChevronLeft/Right, Sun/Moon, Trash2) |
+| ⚡ | **Vite** | `8.0` | Build tool & lightning-fast dev server |
+| 🧪 | **Vitest** | `4.1` | Unit & component testing |
+| 🧩 | **React Testing Library** | `16.x` | User-centric component testing |
 
 ---
 
 ## 🏗 Architecture
 
-```mermaid
-graph TB
-    subgraph Entry ["🚪 Entry Point"]
-        A[main.tsx] --> B[App.tsx]
-    end
-
-    subgraph Calendar ["📅 WallCalendar Component"]
-        B --> C[WallCalendar.tsx<br/><i>Root Orchestrator</i>]
-
-        C --> D[CalendarHeader.tsx<br/><i>Spiral Binding + Hero + Badge</i>]
-        C --> E[MonthNavigator.tsx<br/><i>Prev/Next Controls</i>]
-        C --> F[CalendarGrid.tsx<br/><i>7-Column Date Grid</i>]
-        C --> G[NotesPanel.tsx<br/><i>Notes Textarea + List</i>]
-        C --> H[ThemeToggle.tsx<br/><i>Light/Dark Switcher</i>]
-
-        F --> I[CalendarDay.tsx<br/><i>Atomic Cell · React.memo</i>]
-    end
-
-    subgraph Hooks ["🪝 Custom Hooks"]
-        C -.-> J[useCalendar<br/><i>useReducer state machine</i>]
-        C -.-> K[useDateRange<br/><i>Hover preview logic</i>]
-        C -.-> L[useNotes<br/><i>CRUD + localStorage</i>]
-    end
-
-    subgraph Utils ["🔧 Utilities"]
-        F -.-> M[calendarUtils.ts<br/><i>Pure date helpers</i>]
-        D -.-> N[imageUtils.ts<br/><i>Month → image map</i>]
-    end
-
-    subgraph Data ["📦 Constants & Types"]
-        O[calendar.constants.ts<br/><i>Images, Holidays, Colors</i>]
-        P[calendar.types.ts<br/><i>TypeScript Interfaces</i>]
-    end
-
-    style Entry fill:#1a1a2e,stroke:#16213e,color:#e0e0e0
-    style Calendar fill:#0f3460,stroke:#16213e,color:#e0e0e0
-    style Hooks fill:#533483,stroke:#16213e,color:#e0e0e0
-    style Utils fill:#e94560,stroke:#16213e,color:#e0e0e0
-    style Data fill:#0a3d62,stroke:#16213e,color:#e0e0e0
+```
+┌─────────────────────────────────────────────────────────────┐
+│                      🚪 ENTRY POINT                         │
+│  main.tsx ──▶ App.tsx                                       │
+└────────────────────────┬────────────────────────────────────┘
+                         │
+                         ▼
+┌─────────────────────────────────────────────────────────────┐
+│               📅 WallCalendar.tsx (Orchestrator)            │
+│                                                             │
+│  ┌──────────────────┐  ┌──────────────────┐                 │
+│  │ CalendarHeader    │  │ ThemeToggle      │                 │
+│  │ (Spiral + Hero    │  │ (Light/Dark)     │                 │
+│  │  + Month Badge)   │  └──────────────────┘                 │
+│  └──────────────────┘                                       │
+│                                                             │
+│  ┌──────────────────┐  ┌──────────────────┐                 │
+│  │ MonthNavigator   │  │ CalendarGrid     │                 │
+│  │ (Prev/Next)      │  │ (7-column grid)  │                 │
+│  └──────────────────┘  │                  │                 │
+│                        │  ┌─────────────┐ │                 │
+│  ┌──────────────────┐  │  │ CalendarDay │ │                 │
+│  │ NotesPanel       │  │  │ (React.memo)│ │                 │
+│  │ (Textarea+List)  │  │  └─────────────┘ │                 │
+│  └──────────────────┘  └──────────────────┘                 │
+└─────────────────────────────────────────────────────────────┘
+                         │
+          ┌──────────────┼──────────────┐
+          ▼              ▼              ▼
+┌──────────────┐ ┌──────────────┐ ┌──────────────┐
+│ 🪝 Hooks     │ │ 🔧 Utils     │ │ 📦 Data      │
+│              │ │              │ │              │
+│ useCalendar  │ │ calendarUtils│ │ constants.ts │
+│ (useReducer) │ │ (date-fns)   │ │ (images,     │
+│              │ │              │ │  holidays,   │
+│ useDateRange │ │ imageUtils   │ │  colors)     │
+│ (hover)      │ │ (month→img)  │ │              │
+│              │ │              │ │ types.ts     │
+│ useNotes     │ │              │ │ (interfaces) │
+│ (CRUD+store) │ │              │ │              │
+└──────────────┘ └──────────────┘ └──────────────┘
 ```
 
 ### State Management Flow
 
-```mermaid
-stateDiagram-v2
-    [*] --> Idle : Component Mount
-
-    state "Date Selection" as DS {
-        Idle --> StartSelected : Click date
-        StartSelected --> RangeComplete : Click another date
-        StartSelected --> SingleDay : Click same date
-        RangeComplete --> Idle : Click any date (reset)
-        SingleDay --> Idle : Click any date (reset)
-    }
-
-    state "Hover Preview" as HP {
-        state "Ghost range visible" as GR
-        StartSelected --> GR : Mouse enters cell
-        GR --> StartSelected : Mouse leaves cell
-    }
+```
+  ┌─────────┐
+  │  IDLE   │◀────────────────────────────────────┐
+  └────┬────┘                                     │
+       │ Click date                               │
+       ▼                                          │
+  ┌──────────────┐                                │
+  │ START        │──── Hover ──▶ Ghost Preview     │
+  │ SELECTED     │                                │
+  └────┬─────────┘                                │
+       │                                          │
+       ├── Click same date ──▶ SINGLE DAY ────────┤
+       │                                          │
+       └── Click diff date ──▶ RANGE COMPLETE ────┘
+                               (auto-swap if
+                                end < start)
 ```
 
 ---
@@ -428,8 +374,8 @@ This component targets **WCAG 2.1 Level AA** compliance:
 | 🔵 **Focus Visible** | All focusable elements have visible focus rings |
 | 🏷 **Semantic Roles** | `role="grid"` on calendar, `role="gridcell"` on each day, `role="columnheader"` on week headers |
 | 📢 **ARIA Attributes** | `aria-selected` on selected dates, `aria-label` on icon-only buttons, `aria-live="polite"` for range announcements |
-| 🎨 **Color Contrast** | All text meets **≥ 4.5:1** ratio against backgrounds |
-| 👆 **Touch Targets** | Minimum **44×44px** on mobile (WCAG 2.5.5) |
+| 🎨 **Color Contrast** | All text meets ≥ 4.5:1 ratio against backgrounds |
+| 👆 **Touch Targets** | Minimum 44×44px on mobile (WCAG 2.5.5) |
 
 ---
 
@@ -499,4 +445,3 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 [![Vercel](https://img.shields.io/badge/Deployed_on-Vercel-000?style=for-the-badge&logo=vercel&logoColor=white)](https://swe-task-ecdgwl5yq-joylan9s-projects.vercel.app)
 
 </div>
-]]>
